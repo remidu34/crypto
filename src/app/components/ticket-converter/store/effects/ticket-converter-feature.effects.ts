@@ -1,4 +1,3 @@
-// src/app/components/ticket-converter/state/ticket.effects.ts
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
@@ -7,7 +6,7 @@ import { RateService } from '../../../../services/rate.service';
 import { loadRate, loadRateSuccess, loadRateFailure } from '../actions/ticket-converter-feature.actions';
 
 @Injectable()
-export class TicketEffects {
+export class TicketConverterFeatureEffects {
 
   loadRate$ = createEffect(() => this.actions$.pipe(
     ofType(loadRate),

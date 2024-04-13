@@ -1,4 +1,3 @@
-// src/app/components/ticket-converter/state/ticket.reducer.ts
 import { createReducer, on } from '@ngrx/store';
 import { loadRateSuccess, updateTicketCount, calculateCost } from '../actions/ticket-converter-feature.actions';
 
@@ -18,8 +17,17 @@ export const ticketReducer = createReducer(
   initialState,
   on(loadRateSuccess, (state, { rate }) => ({ ...state, rate })),
   on(updateTicketCount, (state, { count }) => ({ ...state, count })),
-  on(calculateCost, state => ({
-    ...state,
-    cost: (state.count * 4 * (state.count >= 2 ? 0.95 : 1)) / state.rate
-  }))
+  on(calculateCost, state => {
+    let cost = state.count * 4;
+    if (state.count >= 2) {
+      cost *= 0.95; // Appliquer une réduction de 5% si plus de 2 tickets sont achetés
+    }
+    return {
+      ...state,
+      cost: cost / state.rate
+    };
+  })
 );
+
+
+export const ticketConverterFeatureFeatureKey = 'ticketConverterFeature';

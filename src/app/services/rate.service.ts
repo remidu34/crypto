@@ -12,6 +12,7 @@ export class RateService {
   constructor(private http: HttpClient) { }
 
   getRate(currencyId: string): Observable<number> {
+    console.log(currencyId)
     return this.http.get<{ data: any }>(`${this.baseUrl}/${currencyId}`).pipe(
       map(response => parseFloat(response.data.rateUsd))
     );
