@@ -18,6 +18,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+
+// NgRx
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { ticketReducer } from './components/ticket-converter/store/reducers/ticket-converter-feature.reducer';
+import { TicketEffects } from './components/ticket-converter/store/effects/ticket-converter-feature.effects';
 
 @NgModule({
   declarations: [
@@ -38,7 +47,14 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreModule.forRoot({ ticket: ticketReducer }),
+    EffectsModule.forRoot([TicketEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

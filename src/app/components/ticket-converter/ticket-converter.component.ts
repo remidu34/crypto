@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { RateService } from 'src/app/services/rate.service';
+import { Store } from '@ngrx/store';
+import { loadRate, updateTicketCount, calculateCost } from './store/actions/ticket-converter-feature.actions';
+import { selectTicketCost, selectTicketCount } from './store/selectors/ticket-converter-feature.selectors';
+import { TicketState } from './store/reducers/ticket-converter-feature.reducer';
 
 @Component({
   selector: 'app-ticket-converter',
@@ -7,17 +10,16 @@ import { RateService } from 'src/app/services/rate.service';
   styleUrls: ['./ticket-converter.component.scss']
 })
 export class TicketConverterComponent {
-  ticketsCount: number = 1;
-  costInDoge: number = 0;
+  ticketInput: number = 1; // Initialise ticketInput
 
-  constructor(private rateService: RateService) {}
+  constructor(private store: Store<{ ticket: TicketState }>) {}
 
-  updateCostInDoge(): void {
-    const ticketPriceUSD = 4;
-    this.rateService.getRate('dogecoin').subscribe(rate => {
-      const baseCost = ticketPriceUSD * this.ticketsCount;
-      const discount = this.ticketsCount >= 2 ? baseCost * 0.05 : 0;
-      this.costInDoge = (baseCost - discount) / rate;
-    }).unsubscribe;
+  updateTicketsCount() {
+    this.store.dispatch(updateTicketCount({ count: this.ticketInput }));
+    this.store.dispatch(calculateCost());
+  }
+
+  ngOnInit() {
+    this.updateTicketsCount();
   }
 }
