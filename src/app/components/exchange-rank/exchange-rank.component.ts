@@ -21,7 +21,7 @@ export class ExchangeRankComponent implements OnInit {
       this.topExchange = exchanges.sort((a, b) => parseFloat(b.volumeUsd24Hr) - parseFloat(a.volumeUsd24Hr))[0];
     }, error => {
       console.error('Erreur lors du chargement des échanges:', error);
-    });
+    }).unsubscribe;
   }
 
 }

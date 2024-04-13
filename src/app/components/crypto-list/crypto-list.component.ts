@@ -15,6 +15,6 @@ export class CryptoListComponent implements OnInit {
   ngOnInit() {
     this.cryptoService.getAssets().subscribe(data => {
       this.cryptos = data.filter((asset: CryptoAsset) => ['bitcoin', 'ethereum', 'dogecoin'].includes(asset.id));
-    });
+    }).unsubscribe;
   }
 }

@@ -18,6 +18,6 @@ export class TicketConverterComponent {
       const baseCost = ticketPriceUSD * this.ticketsCount;
       const discount = this.ticketsCount >= 2 ? baseCost * 0.05 : 0;
       this.costInDoge = (baseCost - discount) / rate;
-    });
+    }).unsubscribe;
   }
 }
