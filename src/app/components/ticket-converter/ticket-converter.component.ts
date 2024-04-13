@@ -1,26 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { RateService } from 'src/app/services/rate.service';
 
 @Component({
   selector: 'app-ticket-converter',
   templateUrl: './ticket-converter.component.html',
   styleUrls: ['./ticket-converter.component.scss']
 })
-export class TicketConverterComponent implements OnInit {
+export class TicketConverterComponent {
   ticketsCount: number = 1;
-  totalCostInDoge: number = 0; 
+  costInDoge: number = 0;
 
-  constructor() { }
+  constructor(private rateService: RateService) {}
 
-  ngOnInit(): void {
-    this.updateTotalCost();
-  }
-
-  updateTotalCost() {
-    this.totalCostInDoge = this.ticketsCount * 10;
-  }
-
-  convertToDoge() {
-    this.updateTotalCost();
-    console.log("Nombre de tickets:", this.ticketsCount, "Coût en Dogecoin:", this.totalCostInDoge);
+  updateCostInDoge(): void {
+    const ticketPriceUSD = 4;
+    this.rateService.getRate('dogecoin').subscribe(rate => {
+      const baseCost = ticketPriceUSD * this.ticketsCount;
+      const discount = this.ticketsCount >= 2 ? baseCost * 0.05 : 0;
+      this.costInDoge = (baseCost - discount) / rate;
+    });
   }
 }
