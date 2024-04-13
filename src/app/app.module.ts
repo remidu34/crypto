@@ -26,7 +26,7 @@ import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ticketReducer } from './components/ticket-converter/store/reducers/ticket-converter-feature.reducer';
-import { TicketEffects } from './components/ticket-converter/store/effects/ticket-converter-feature.effects';
+import { TicketConverterFeatureEffects } from './components/ticket-converter/store/effects/ticket-converter-feature.effects';
 
 @NgModule({
   declarations: [
@@ -54,7 +54,7 @@ import { TicketEffects } from './components/ticket-converter/store/effects/ticke
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     StoreModule.forRoot({ ticket: ticketReducer }),
-    EffectsModule.forRoot([TicketEffects])
+    EffectsModule.forRoot([TicketConverterFeatureEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

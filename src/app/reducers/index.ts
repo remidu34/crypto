@@ -10,12 +10,12 @@ import * as fromTicketConverterFeature from '../components/ticket-converter/stor
 
 export interface State {
 
-  [fromTicketConverterFeature.ticketConverterFeatureFeatureKey]: fromTicketConverterFeature.State;
+  [fromTicketConverterFeature.ticketConverterFeatureFeatureKey]: fromTicketConverterFeature.TicketState;
 }
 
 export const reducers: ActionReducerMap<State> = {
 
-  [fromTicketConverterFeature.ticketConverterFeatureFeatureKey]: fromTicketConverterFeature.reducer,
+  [fromTicketConverterFeature.ticketConverterFeatureFeatureKey]: fromTicketConverterFeature.ticketReducer,
 };
 
 
