@@ -1,0 +1,10 @@
+<mat-card *ngIf="topExchange">
+    <mat-card-title>Plateforme d'échange dominante</mat-card-title>
+    <mat-card-content>
+      <div>
+        <h2>{{ topExchange.name }}</h2>
+        <p>Volume des 24 dernières heures : {{ topExchange.volumeUsd | number:'1.0-0' }} USD</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  

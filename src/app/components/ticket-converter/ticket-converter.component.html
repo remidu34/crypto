@@ -1,0 +1,14 @@
+<mat-card>
+    <mat-card-title>Acheter des Tickets avec Dogecoin</mat-card-title>
+    <mat-card-content>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre de tickets</mat-label>
+          <input matInput [(ngModel)]="ticketsCount" type="number" min="1">
+        </mat-form-field>
+        <p>Coût total en Dogecoin : {{ totalCostInDoge | number:'1.2-2' }} DOGE</p>
+        <button mat-raised-button color="primary" (click)="convertToDoge()">Convertir</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  

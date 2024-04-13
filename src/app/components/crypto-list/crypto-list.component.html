@@ -1,0 +1,13 @@
+<mat-card>
+    <mat-card-title>Liste des Cryptomonnaies</mat-card-title>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item *ngFor="let crypto of cryptos">
+          <mat-icon matListIcon>currency_bitcoin</mat-icon>
+          <div matLine>{{ crypto.name }}</div>
+          <div matLine>Prix : {{ crypto.priceUsd | number:'1.2-2' }} USD</div>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+  
